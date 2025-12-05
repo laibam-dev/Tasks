@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing:border-box;
+}
+.container
+{
+    width:100%;
+    min-height: 90vh;
+    background-color:antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.todolist{
+     width:490px;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    color: aqua;
+}
+.todolist h1{
+    text-align: center;
+    font-size: 30px;
+    
+}
+.row{
+text-align: center;
+margin-top: 10px;
+margin-bottom: 10px;
+
+}
+.row input{
+    flex:1;
+    background-color: transparent;
+    width: 60%;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+button
+{
+    width: 80px;
+    padding:8px;
+    border-radius: 15px;
+    background-color: aquamarine;
+}
+
+ul li{
+    margin-top: 10px;
+    font-size: 20px;
+    padding:8px;
+    padding-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .todolist {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .row input {
+        width: 55%;
+        padding: 8px;
+    }
+
+    button {
+        width: 70px;
+        padding: 7px;
+    }
+
+    ul li {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+
+          
+    
+    .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color:bisque;
+    }
+
+    .row input {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100px;
+        margin: 5px 0;
+    }
+
+    ul li {
+        font-size: 16px;
+    }
+
+    .todolist h1 {
+        font-size: 24px;
+    }
+}
+</style>
+<body>
+  <div class ="container">
+    <div class ="todolist">
+        <h1>TODO APP</h1>
+        <div class ="row">
+        <input type="text" id="task" placeholder="Enter a new task">
+        <button id="button">Add tasks</button>
+        </div>
+      <ul id="list">
+    
+    </ul>
+  </div>
+</div>
+    <script>
+    const taskinput=document.getElementById("task");
+    const btn=document.getElementById("button");
+    const tasklist= document.getElementById("list");
+    btn.addEventListener("click",()=>
+{
+    const task=taskinput.value;
+
+     if(task.trim()==="")
+   {
+     alert("please enter the task");
+     return;
+   }
+
+  
+  const li = document.createElement("li");
+  li.textContent = task;
+
+  
+  const completeBtn = document.createElement("button");
+  completeBtn.textContent = "Complete";
+  completeBtn.className = "cbtn";
+  completeBtn.addEventListener("click", () => {
+  li.style.color = "green"; 
+  li.style.fontWeight = "bold"; 
+  li.innerHTML = `✔️ ${task}`; 
+});
+
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.className = "dbtn";
+  deleteBtn.addEventListener("click", () => {
+    li.remove();
+  });
+
+
+  li.appendChild(completeBtn);
+  li.appendChild(deleteBtn);
+
+  tasklist.appendChild(li);
+  taskinput.value = "";
+});
+    </script>
+</body>
+</html>
