@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Today I learned </h1>
+    <ul>
+      <li>Promise</li>
+      <li>async await</li>
+      <li>API</li>
+      <li>fetch data</li>
+      
+
+    </ul>
+    <h1>API</h1>
+    <p id="d"></p>
+    <button id="btn" style="padding: 10px; width: 70px; background-color:aliceblue; color: black">click</button>
+
+    <script>
+       /* console.log("yahooo");
+        setTimeout(()=>{
+            console.log("laibaa");      ///asyncronous
+        },2000);
+        console.log("mubeen");
+        function calculator(a,b,sumCallback){ 
+            
+            sumCallback(a,b);
+        }                                       //anoymous callback function
+        calculator(2,3,(a,b)=> {
+        console.log("sum:",a+b);
+    });
+
+    //callback asyncronous///
+
+        const a=()=>{                                    
+        console.log("hellow");}
+      setTimeout(a,3000);
+
+            //// callback hell/////
+            function getdata(id,getnextdata)
+            {
+               setTimeout(()=>{
+                 console.log("data",id);
+                 if(getnextdata){
+                    getnextdata();
+                 }
+               },3000);
+            }
+           // getdata(789);
+            //getdata(7890);
+            getdata(1,()=>{
+                getdata(2,()=>{
+                    getdata(3,()=>{
+                        getdata(4);
+                    });
+                });
+            });
+         
+     ///promise///
+     //let promise=new promise ((resolved,reject)=>{...})
+     //promise has three states pending fullfill rejected we said it resolved
+        //promise ager resolved ho toh then()used hoga agr promise reject ho tph catech() used ho ga
+
+     let promise=new Promise((resolve,reject)=>{
+        console.log("promise...");
+        resolved("sucess");
+     });
+      function data(i,nextdata)
+      {
+        return new Promise((resolved,reject)=>{
+            setTimeout(()=>{
+                console.log("result",i);
+                 if(nextdata)
+            {
+                nextdata();
+            }
+            },9000)
+            resolved("sucess");
+        });
+      }        
+   data(5)
+    .then(() => data(2))
+    .then(() => {
+        console.log("All done");
+    });*/
+      
+    
+    /////then(),catch() function
+    const getpromise=()=>
+    {
+       return new Promise((resolve,reject)=>
+    {
+        console.log("im a promise");
+       // resolve("sucess");
+       reject("networking error");
+    });
+    }
+
+    let promise=getpromise();
+    promise.then(()=>
+   {
+    console.log("fulfilled");
+   });
+   promise.catch(()=>{
+    console.log("error");
+   })
+
+
+
+   ///promise chain////
+  /*function chain()
+  {
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+        console.log("data 1");
+        resolve("success");
+    },200)
+    });
+  }
+   function chain1()
+   {
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=> {
+        console.log("data 2");
+        resolve("success");
+    },400)
+    });
+  }
+  console.log("fetching data1...");
+  chain().then((res)=>{
+    console.log("fetching data2.....");
+    chain1().then((res)=>{
+     console.log("done ");
+    });
+});*/
+
+                              ////async await////
+
+///asyn function(){.........} it always return the promise 
+//  aur kisi i formal function koasyn ana ckhty hin
+//await funtion(){....} it always used in the asyn function 
+//yh kia kam krta ha jab tak hmary pass promise nhi aah jahta ha yh baki sari execution ko rok kr rkhta ha 
+
+
+  function chain3(ID,name,age)
+  {
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+        console.log("data:",ID);
+        console.log("name  ",name);
+        console.log("age ",age);
+        resolve("success");
+    },200)
+    });
+  }
+  (async function ()
+  {
+    await chain3(4567,"laiba","21");
+    await chain3(456);
+    await chain3(467);
+  })();
+
+                    ///**********/APIS/**********//////
+ /*const URL="https://jsonplaceholder.typicode.com/users";
+const parag=document.querySelector("#d");
+const get= async ()=>
+ {
+  let pro= await fetch(URL);
+ console.log(pro.status);
+ let data=await pro.json();  ///json second promise ko return krta ha yh hm ko js object return krta ha mtlb actual data nikal kr dyta ha
+ console.log(data[2].name);
+ parag.innerText =JSON.stringify(data[1]);
+
+// parag.innerText=data[1];
+ }
+get();
+/*function get() {
+  fetch(URL)
+  .then((response)=>{
+  return response.json();
+})
+  .then((data)=>{
+    console.log(data);
+});
+}
+get();*/
+ 
+const URL = "https://jsonplaceholder.typicode.com/posts";
+const row = document.querySelector("#d");
+
+row.style.backgroundColor = "silver";
+row.style.padding = "40px";
+
+const getUsers = async () => {
+  try {
+    let res = await fetch(URL);
+    let data = await res.json();
+
+    // Show all posts
+    let html = "";
+    data.forEach(post => {
+      html += `
+        <p>
+          <strong>${post.title}</strong><br>
+          
+        </p>
+        <hr>
+      `;
+    });
+
+    row.innerHTML = html;
+    btnn.remove();
+
+  } catch (err) {
+    row.innerText = "Error fetching data.";
+    console.error(err);
+  }
+};
+
+btn.addEventListener("click", getUsers);
+
+  //get//post//delete//patch//in http
+    </script>
+</body>
+</html>
