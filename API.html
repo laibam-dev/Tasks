@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      font-size: 20px;
+      margin-bottom: 15px;
+    
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #f2f2f2;
+            box-sizing: border-box;
+
+      border-radius: 4px;
+      border-bottom:2px solid black;
+      background-color:none;
+    }
+
+    .group {
+      display: flex;
+      gap: 20px;
+      background-color: antiquewhite;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .group .form-group {
+      flex: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Currency Converter</h1>
+     
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter amount" />
+    </div>
+    
+    <div class="group">
+      <div class="form-group">
+        <label for="from-currency">From:</label>
+        <select id="from-currency">
+          <option value="USD">USD</option>
+          <option value="PKR">PKR</option>
+          <option value="EUR">EUR</option>
+          <option value="INR">INR</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="to-currency">To:</label>
+        <select id="to-currency">
+          <option value="PKR">PKR</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="INR">INR</option>
+        </select>
+      </div>
+    </div>
+    <button id="convert-btn">Convert</button>
+
+    <div id="result"></div>
+  </div>
+  <script>
+
+const a = document.getElementById("amount");
+const b = document.getElementById("from-currency");
+const c = document.getElementById("to-currency");
+const d = document.getElementById("convert-btn");
+
+d.addEventListener("click", async () => {
+
+  const amount = a.value;
+  const from = b.value;
+  const to = c.value;
+  if (amount === "") {
+    alert("Please enter amount");
+    return;
+  }
+  try {
+    const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+    const data = await res.json();
+    const rate = data.rates[to];
+    const result = amount * rate;
+    document.getElementById("result").innerText =
+      `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+
+  } catch (error) {
+    console.log("Error", error);
+    document.getElementById("result").innerText = "Error fetching rate";
+  }
+});
+
+
+    
+  </script>
+</body>
+</html>
