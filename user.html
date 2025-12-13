@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+    *{
+        box-sizing: border-box;
+        padding: 0;
+    }
+    body{
+       background-color: black;
+       height: 100vh;
+       margin: 30px;
+    }
+    .user{
+        
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 100%;
+        height: auto;
+        margin: auto;
+        border: 1px solid red;
+        border-radius: 5px;
+        box-shadow: inset;
+        padding: 20px;
+            box-shadow: 0px 0px 15px red;  
+
+
+    }
+
+    .first{
+        width: 190px;
+        height: 300px;
+        border: 1px solid red;
+        border-radius: 4px;
+        margin: 20px;
+    }
+    h1{
+        font-size: 40px;
+        margin:50px;
+        color: white;
+        font-style: italic;
+        text-align: center;
+    }
+    h1:hover{
+            box-shadow: 0px 0px 15px red;  
+
+    }
+    img{
+        
+        height:60%;
+        width:100%;
+        object-fit: cover;
+        align-content: center;
+
+    }
+    h2{
+        color: white;
+        padding: 4px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+
+
+    }
+
+a{
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  margin-top: 5px;
+}
+  
+    a:hover{
+  color: red;
+  transform: scale(1.1);
+}
+
+a:active{
+  background-color: aliceblue;
+  color: blue;
+}
+    
+
+    .first{
+    width: 190px;
+    height: 300px;
+    border: 1px solid red;
+    border-radius: 4px;
+    margin: 20px;
+    transition: all 0.3s ease;   
+}
+
+.first:hover{
+    transform: scale(1.1);      
+    box-shadow: 0px 0px 15px red;  
+    border-color: red; 
+}
+
+    </style>
+</head>
+<body>
+    <h1>Github user</h1>
+      <div class="user"></div>
+     
+      
+
+    <script>
+    
+    const url = "https://api.github.com/users";
+
+const fetchdata = async () => {
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log(data);
+
+        const parent = document.querySelector(".user");
+
+        for (let user of data) {
+            const element = document.createElement("div");
+            element.className = "first";
+
+            const image = document.createElement("img");
+            image.src = user.avatar_url;
+
+            const heading = document.createElement("h2");
+            heading.innerText = user.login;
+
+            const ancher = document.createElement("a");
+            ancher.href = user.html_url;
+            ancher.target = "_blank";
+            ancher.innerText = "Visit Profile";
+
+            element.append(image, heading, ancher);
+            parent.append(element);
+        }
+    } catch (error) {
+        console.log("Error fetching data", error);
+    }
+};
+
+fetchdata();
+
+    
+    </script>
+</body>
+</html>
