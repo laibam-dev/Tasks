@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Toggle</title>
+</head>
+<style>
+    .active{
+        color:brown;
+        font-size: 30px;
+        padding:4px;
+        background-color: bisque;
+    }
+</style>
+<body>
+
+    <h1 id ="heading">yahoooo</h1>
+    <input type="password" id="passwordInput" placeholder="Enter password"/>
+    <button id="toggleBtn">Show</button>
+
+    <button id="btn">css</button>
+    <button id="btn1">add class</button>
+    <button id="btn2">removed class</button>
+         
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta eligendi voluptatem optio iste soluta, laudantium veniam pariatur modi nemo doloremque ullam tempore, perspiciatis libero, cum veritatis. Nesciunt, eaque! Earum, aperiam.</p>
+
+    <script>
+        let btn = document.getElementById("toggleBtn");
+        let ipt = document.getElementById("passwordInput");
+        btn.addEventListener("click", () => {
+            if (ipt.type === "password") {
+                ipt.type = "text";
+                btn.textContent = "Hide";
+            } else {
+                ipt.type = "password";
+                btn.textContent = "Show";
+            }
+        });
+ let b=document.querySelector("#btn")
+ b.addEventListener("click",()=>
+{
+    alert("laiba");
+});
+ let i=document.querySelector("p")
+i.addEventListener("click",()=>{
+    i.style.color="blue";
+    i.style.backgroundColor="yellow";
+});
+
+
+let btnn=document.querySelector("#btn1");
+btnn.addEventListener("click",()=>
+{
+    i.classList.add('active');
+});
+
+let btnnn=document.querySelector("#btn2");
+btnnn.addEventListener("click",()=>
+{
+    i.classList.remove('active');
+});
+
+
+
+ </script>
+</body>
+</html>
